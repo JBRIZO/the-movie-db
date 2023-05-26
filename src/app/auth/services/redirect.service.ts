@@ -7,7 +7,7 @@ export class RedirectService {
   private redirectPath = '?redirect_to=';
 
   redirectToLogin(response: IGetTokenResponse): void {
-    const currentUrl = window.location.origin + '/authenticate';
+    const currentUrl = window.location.origin + '/the-movie-db/authenticate';
     const url =
       this.redirectBaseUrl +
       'authenticate/' +

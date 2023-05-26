@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Page Not Found</title>
+  <base href="/">
+  <style>
+  </style>
+</head>
+<body>
+  <script>
+    const url = window.location.href;
+    const baseHref = document.querySelector('base').getAttribute('href');
+    const path = url.replace(baseHref, '');
+    const newUrl = baseHref + 'index.html' + path;
+    window.location.replace(newUrl);
+  </script>
+</body>
+</html>
