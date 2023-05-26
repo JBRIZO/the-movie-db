@@ -1,0 +1,61 @@
+<div
+  class="content bg-primary inline-block w-[250px] max-h-[250px] overflow-y-auto flex flex-col justify-center pt-3 rounded">
+  <button
+    routerLink="/lists/create/{{ movieId }}"
+    class="bg-primary text-white font-bold flex flex-row justify-center whitespace-nowrap w-full mb-2">
+    <mat-icon>add</mat-icon>Create New List
+  </button>
+  <ng-container *ngIf="lists$ | async as userLists">
+    <div *ngIf="userLists.length > 0" class="overflow-y-auto m-2">
+      <div class="m-2">
+        <button
+          (click)="isDropdownHidden = !isDropdownHidden"
+          class="w-full text-white bg-primary font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex justify-between"
+          [ngClass]="{
+            'ring-4': !isDropdownHidden,
+            'ring-gradientBlue': !isDropdownHidden
+          }"
+          type="button">
+          Add to list<svg
+            class="ml-2 w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="z-10 w-full bg-primary" [class.hidden]="isDropdownHidden">
+        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
+          <li
+            class="list__item"
+            *ngFor="let list of userLists"
+            (click)="
+              !isMovieInList(list)
+                ? addMovieToList(list.id!)
+                : removeMovieFromList(list.id!)
+            "
+            [class.font-bold]="isMovieInList(list)">
+            <div
+              class="block py-2 px-4 hover:bg-gradientBlue rounded hover:cursor-pointer">
+              {{ list.name }}
+              <span class="italic text-sm hover:cursor-pointer">{{
+                isMovieInList(list) ? '(Added)' : ''
+              }}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="userLists.length === 0">
+      <div class="no__lists italic font-semibold text-center text-white">
+        No existing lists...
+      </div>
+    </div>
+  </ng-container>
+</div>

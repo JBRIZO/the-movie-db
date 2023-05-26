@@ -1,0 +1,27 @@
+<div class="login">
+  <div class="login__container max-w-[82rem] m-auto flex flex-col gap-3 p-7">
+    <h1 class="text-primary text-5xl font-bold">Login</h1>
+    <h5 class="text-primary text-2xl font-medium">
+      Login requires an account from The Movie Data Base and the respective
+      authorization from their site
+    </h5>
+    <h6>
+      In order to use the editing and rating capabilities of TMDB, as well as
+      get personal recommendations you will need to login to your account. If
+      you do not have an account, registering for an account is free and simple.
+      Click here to get started.
+    </h6>
+    <h6>To Authorize your account click on the following Login Button</h6>
+    <button
+      [disabled]="loginStarted"
+      (click)="loginClick()"
+      class="login__button w-44 flex flex-row items-center justify-center font-extrabold p-2 text-white text-xl bg-primary hover:bg-primary/90 rounded-md disabled:bg-gray-500 disabled:cursor-not-allowed"
+      color="primary">
+      <mat-spinner
+        color="accent"
+        diameter="20"
+        *ngIf="loginStarted"></mat-spinner>
+      <span class="login__text pl-3">Login</span>
+    </button>
+  </div>
+</div>

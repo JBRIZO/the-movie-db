@@ -1,0 +1,35 @@
+<div
+  *ngIf="moviesLoading$ | async"
+  class="m-x-auto pt-7 flex flex-col items-center justify-center">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="(moviesLoading$ | async) === false">
+  <div
+    *ngIf="movie$ | async as movie"
+    class="movie-details max-w-[82rem] m-auto">
+    <app-movie-details-movie
+      class="movie-details__specific"
+      [movie]="movie"></app-movie-details-movie>
+    <app-movie-details-reviews
+      *ngIf="areReviews$ | async"
+      class="movie-details__reviews"
+      sectionTitle="Reviews"></app-movie-details-reviews>
+    <app-carrousel
+      class="movie-details__similar"
+      [movieId]="movie.id"
+      [actionToPerform]="null"
+      [actionToPerformMovieId]="similarStart"
+      [carrouselSelector]="similarMovies"
+      sectionTitle="Similar Movies">
+    </app-carrousel>
+    <app-carrousel
+      class="movie-details__recommended"
+      *ngIf="areRecommended$ | async"
+      [movieId]="movie.id"
+      [actionToPerform]="null"
+      [actionToPerformMovieId]="recommendedStart"
+      [carrouselSelector]="recommendedMovies"
+      sectionTitle="Recommended Movies">
+    </app-carrousel>
+  </div>
+</div>

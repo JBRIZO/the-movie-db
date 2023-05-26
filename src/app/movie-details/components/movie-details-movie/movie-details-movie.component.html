@@ -1,0 +1,169 @@
+<div class="movie-content min-h-[60vh] relative">
+  <div
+    [style.backgroundImage]="'url(' + imagePath2 + movie.backdrop_path + ')'"
+    class="movie-content__cover hidden md:block absolute top-0 left-0 w-full h-full -z-10 bg-cover"></div>
+  <div
+    class="movie-content__cover absolute hidden md:block top-0 left-0 w-full h-full bg-gradient-to-r from-gray-900 to-black/50 0 -z-10"></div>
+  <div
+    class="movie-content__cover absolute top-0 left-0 w-full h-full bg-gray-900 md:hidden -z-10"></div>
+  <div
+    class="movie-content__container p-7 z-0 flex flex-col md:flex-row gap-10">
+    <div class="movie-content__column self-center md:self-start">
+      <div class="movie-content__image w-[300px]">
+        <img
+          [class]="movie.backdrop_path"
+          class="rounded-lg"
+          [ngSrc]="imagePath + movie.poster_path"
+          width="300"
+          height="450" />
+      </div>
+    </div>
+    <div
+      class="movie-content__column text-white flex flex-col gap-4 overflow-x-clip">
+      <div class="movie-content__title-container">
+        <div class="movie-content__title font-bold text-4xl text-white pt-2">
+          {{ movie.title }}
+          <span class="movie__year font-light text-gray-400"
+            >({{ movie.release_date | date : 'yyyy' }})</span
+          >
+        </div>
+        <div
+          class="movie-content__title-other flex flex-wrap items-center justify-center sm:justify-start gap-1 font-thin">
+          <span>{{ movie.release_date | date : 'dd/MM/yyyy' }} •</span>
+          <span class="movie-content__genders">
+            <span class=" " *ngFor="let gender of movie.genres"
+              >{{ gender.name }}
+            </span>
+          </span>
+          <span *ngIf="movie.runtime"
+            >• {{ movie.runtime / 60 | number : '1.0-0' }} h</span
+          >
+        </div>
+      </div>
+      <div
+        class="movie-content__reactions items-center flex flex-col sm:flex-row gap-4">
+        <app-movie-details-circle
+          class="hover:scale-[1.1] pl-3 hover:cursor-pointer transition ease-in-out"
+          [percent]="movie.vote_average"></app-movie-details-circle>
+        <div class="circle">
+          User <br />
+          Score
+        </div>
+        <div class="flex flex-row gap-4">
+          <div class="relative">
+            <button
+              (click)="listClicked()"
+              mat-mini-fab
+              [matTooltip]="
+                (logged$ | async) ? 'Add to list' : 'Login to add movie to list'
+              "
+              matTooltipClass="bg-primary"
+              color="primary"
+              aria-label="add-to-list">
+              <mat-icon class="text-base">format_list_bulleted</mat-icon>
+            </button>
+            <app-add-to-list
+              [movieId]="movie.id"
+              class="absolute w-[250px] top-16 transform -translate-x-1/2 -bottom-full left-1/2"
+              *ngIf="addListOpen">
+            </app-add-to-list>
+          </div>
+          <button
+            (click)="favoriteClick()"
+            mat-mini-fab
+            [matTooltip]="
+              (logged$ | async)
+                ? 'Mark as favorite'
+                : 'Login to mark movie as favorite'
+            "
+            matTooltipClass="bg-primary"
+            color="primary"
+            aria-label="add-to-favorite">
+            <mat-icon
+              [class]="isFavorite ? 'text-base text-red-600' : 'text-base'"
+              >favorite</mat-icon
+            >
+          </button>
+          <button
+            (click)="watchlistClick()"
+            mat-mini-fab
+            [matTooltip]="
+              (logged$ | async)
+                ? 'Add to your watchlist'
+                : 'Login to add the movie to your watchlist'
+            "
+            matTooltipClass="bg-primary"
+            color="primary"
+            aria-label="add-to-watchlist">
+            <mat-icon
+              [class]="isInWatchList ? 'text-base text-green-600' : 'text-base'"
+              >bookmark</mat-icon
+            >
+          </button>
+          <div class="relative">
+            <button
+              (click)="ratedClick()"
+              mat-mini-fab
+              [matTooltip]="
+                (logged$ | async) ? 'Rate it!' : 'Login to rate this movie'
+              "
+              matTooltipClass="bg-primary"
+              color="primary"
+              aria-label="rate">
+              <mat-icon
+                [class]="isRated ? 'text-base text-yellow-500' : 'text-base'"
+                >star</mat-icon
+              >
+            </button>
+            <app-movie-details-rating
+              class="absolute top-16 transform -translate-x-1/2 -bottom-full left-1/2"
+              *ngIf="ratingOpen"
+              [movieId]="movie.id"
+              [logged$]="logged$"
+              [rating]="rating"></app-movie-details-rating>
+          </div>
+        </div>
+      </div>
+      <div class="movie-content__tagline font-thin text-gray-400 italic">
+        {{ movie.tagline }}
+      </div>
+
+      <div class="movie-content__overview text-white font-normal text-xl">
+        <h2>Overview</h2>
+        <p class="font-thin text-sm">{{ movie.overview }}</p>
+      </div>
+      <div
+        class="movie-content__production-companies text-white font-normal text-xl">
+        <div *ngFor="let company of movie.production_companies">
+          <h6 class="text-gray-400">{{ company.name }}</h6>
+        </div>
+      </div>
+      <div class="movie-content__details flex flex-wrap gap-10">
+        <div
+          *ngIf="movie.revenue > 0"
+          class="movie-content__revenue flex flex-col">
+          <h6 class="font-bold">Revenue</h6>
+          <p>{{ movie.revenue | currency : 'USD' : 'symbol' : '1.0-0' }}</p>
+        </div>
+        <div
+          *ngIf="movie.budget > 0"
+          class="movie-content__bugdet flex flex-col">
+          <h6 class="font-bold">Budget</h6>
+          <p>{{ movie.budget | currency : 'USD' : 'symbol' : '1.0-0' }}</p>
+        </div>
+        <div class="movie-content__status flex flex-col">
+          <h6 class="font-bold">Status</h6>
+          <p>{{ movie.status }}</p>
+        </div>
+        <div class="movie-content__vote-count flex flex-col">
+          <h6 class="font-bold">Votes</h6>
+          <p>{{ movie.vote_count }}</p>
+        </div>
+        <div class="movie-content__popularity flex flex-col">
+          <h6 class="font-bold">Popularity</h6>
+          <p>{{ movie.popularity }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

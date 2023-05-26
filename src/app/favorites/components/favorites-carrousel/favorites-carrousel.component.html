@@ -1,0 +1,15 @@
+<div *ngIf="areFavoritesLoaded$ | async as isLoaded">
+  <div class="carrousel__container min-h-wrap w-full" *ngIf="isLoaded">
+    <div
+      class="carrousel flex flex-col gap-2 pb-10"
+      infinite-scroll
+      [infiniteScrollDistance]="0"
+      [infiniteScrollThrottle]="1000"
+      (scrolled)="onScroll()">
+      <ng-container *ngIf="favoriteMovies$ | async as movies">
+        <app-favorite-preview *ngFor="let movie of movies" [movie]="movie">
+        </app-favorite-preview>
+      </ng-container>
+    </div>
+  </div>
+</div>

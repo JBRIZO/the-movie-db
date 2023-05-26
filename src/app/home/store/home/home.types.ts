@@ -1,0 +1,20 @@
+export enum HomeActionTypes {
+  FETCH_POPULAR_START = '[Home MainComponent] FETCH_POPULAR_START',
+  FETCH_POPULAR_SUCCESS = '[HomeEffects fetchPopular] FETCH_POPULAR_SUCCESS',
+  FETCH_POPULAR_FAILURE = '[HomeEffects fetchPopular] FETCH_POPULAR_FAILURE',
+  FETCH_TOP_RATED_START = '[Home MainComponent] FETCH_TOP_RATED_START',
+  FETCH_TOP_RATED_SUCCESS = '[HomeEffects fetchTopRated] FETCH_TOP_RATED_SUCCESS',
+  FETCH_TOP_RATED_FAILURE = '[HomeEffects fetchTopRated] FETCH_TOP_RATED_FAILURE',
+  FETCH_PLAYING_NOW_START = '[Home MainComponent] FETCH_PLAYING_NOW_START',
+  FETCH_PLAYING_NOW_SUCCESS = '[HomeEffects fetchTopRated] FETCH_PLAYING_NOW_SUCCESS',
+  FETCH_PLAYING_NOW_FAILURE = '[HomeEffects fetchTopRated] FETCH_PLAYING_NOW_FAILURE',
+  FETCH_UPCOMING_START = '[Home MainComponent] FETCH_UPCOMING_START',
+  FETCH_UPCOMING_SUCCESS = '[HomeEffects fetchTopRated] FETCH_UPCOMING_SUCCESS',
+  FETCH_UPCOMING_FAILURE = '[HomeEffects fetchTopRated] FETCH_UPCOMING_FAILURE',
+}
+
+export type HomeStartActionsTypes =
+  | HomeActionTypes.FETCH_PLAYING_NOW_START
+  | HomeActionTypes.FETCH_POPULAR_START
+  | HomeActionTypes.FETCH_TOP_RATED_START
+  | HomeActionTypes.FETCH_UPCOMING_START;

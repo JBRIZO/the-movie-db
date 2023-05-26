@@ -1,0 +1,41 @@
+<div class="card w-[150px] relative">
+  <div class="min-h-[225px] min-w-[150px]">
+    <img
+      *ngIf="imagePath && imageUrl"
+      class="card__image rounded-md backdrop:rounded-sm h-[225px] w-[150px] object-cover hover:cursor-pointer"
+      width="150"
+      height="225"
+      mat-card-image
+      [ngSrc]="imagePath + imageUrl"
+      alt="Movie Picture"
+      (click)="handleClick()" />
+    <!-- Placeholder image for not found -->
+    <img
+      *ngIf="!imageUrl"
+      class="card__image-placeholder rounded-md backdrop:rounded-sm h-[225px] w-[150px] object-cover"
+      src="assets/not-found-icon.jpg"
+      alt="Not Found Image" />
+  </div>
+  <app-circle
+    *ngIf="voteAvg > 0"
+    [percent]="voteAvg"
+    class="card__voteAvg absolute top-[205px] left-2"></app-circle>
+  <div class="card__text-container pt-[30px] px-2">
+    <h1
+      class="card__title font-bold text-black hover:underline hover:cursor-pointer"
+      (click)="handleClick()">
+      {{ title }}
+    </h1>
+    <h3 class="card__subtitle font-thin text-gray-500">
+      {{ released | date }}
+    </h3>
+    <div class="card__popularity flex flex-row gap-1">
+      <mat-icon class="text-green-700">trending_up</mat-icon>
+      <span>{{ popularity | number : '1.0-0' }}</span>
+    </div>
+    <div class="card__votes flex flex-row gap-1">
+      <mat-icon class="text-yellow-700">star</mat-icon>
+      <span>{{ voteCount | number : '1.0-0' }}</span>
+    </div>
+  </div>
+</div>

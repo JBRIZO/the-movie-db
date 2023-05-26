@@ -1,0 +1,23 @@
+<div class="h-[340px] w-[200px] hover:shadow-2xl">
+  <div
+    class="rounded-t-lg h-[300px] w-[200px] bg-cover hover:cursor-pointer"
+    [style.background-image]="
+      'url(https://image.tmdb.org/t/p/w500' + movie.poster_path + ')'
+    "
+    routerLink="/movies/{{ movie.id }}"></div>
+  <div
+    class="flex flex-row text-gradientBlue bg-primary justify-between items-center p-2">
+    <p>{{ position + 1 }}</p>
+    <div class="flex flex-row">
+      <mat-icon
+        (click)="deleteMovie()"
+        class="text-gray-400 scale-75 hover:cursor-pointer hover:text-white"
+        >delete</mat-icon
+      >
+      <div class="flex flex-row items-center">
+        <mat-icon class="text-gray-400 scale-75">star</mat-icon>
+        <p class="text-gray-400 text-sm">{{ movie.vote_average * 10 }}%</p>
+      </div>
+    </div>
+  </div>
+</div>

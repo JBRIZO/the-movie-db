@@ -1,0 +1,21 @@
+<div class="review-carrousel__container min-h-80">
+  <h1 class="review-carrousel-title font-bold py-3 text-2xl px-10 text-primary">
+    {{ sectionTitle }}
+  </h1>
+  <div
+    class="review-carrousel overflow-x-auto flex flex-row gap-10 pb-10 last:pr-10">
+    <app-card-reviews
+      class="review-carrousel__card first:pl-10"
+      *ngFor="let review of reviews$ | async"
+      [author]="review.author"
+      [avatarPath]="
+        review.author_details.avatar_path
+          ? review.author_details.avatar_path
+          : ''
+      "
+      [content]="review.content"
+      [createdAt]="review.created_at"
+      [username]="review.author_details.username">
+    </app-card-reviews>
+  </div>
+</div>

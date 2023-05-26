@@ -1,0 +1,140 @@
+<nav class="bg-primary shadow">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 relative">
+      <div id="header-logo" class="flex-shrink-0 flex items-center">
+        <img
+          (click)="routeClick()"
+          routerLink="/home"
+          class="hover:cursor-pointer text-white block h-4 sm:h-5 md:h6 w-auto"
+          src="/assets/tmdb.svg"
+          alt="The IMTB" />
+      </div>
+      <div id="header-routes" class="hidden sm:ml-6 sm:flex sm:space-x-8">
+        <a
+          id="header-route"
+          routerLink="/home"
+          [class]="
+            (rlah.isActive ? styleActive : styleNormal) +
+            ' flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
+          "
+          routerLinkActive
+          #rlah="routerLinkActive">
+          Home
+        </a>
+        <a
+          id="header-route"
+          routerLink="/search"
+          [class]="
+            (rlam.isActive ? styleActive : styleNormal) +
+            ' flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
+          "
+          routerLinkActive
+          #rlam="routerLinkActive">
+          Search
+        </a>
+        <a
+          id="header-route"
+          routerLink="/favorites"
+          [class]="
+            (rlaf.isActive ? styleActive : styleNormal) +
+            ' flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
+          "
+          routerLinkActive
+          #rlaf="routerLinkActive">
+          Favorites
+        </a>
+        <a
+          id="header-route"
+          routerLink="/lists"
+          [class]="
+            (rlal.isActive ? styleActive : styleNormal) +
+            ' flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
+          "
+          routerLinkActive
+          #rlal="routerLinkActive">
+          Lists
+        </a>
+      </div>
+      <div id="header-auth" class="ml-6 flex items-center">
+        <a
+          *ngIf="!(loggedIn$ | async)"
+          routerLink="/login"
+          class="hidden sm:block border-transparent text-white hover:bg-white/10 rounded-sm items-center px-2 pt-1 border-b-2 text-sm font-medium">
+          Login
+        </a>
+        <app-user-dropdown *ngIf="loggedIn$ | async"></app-user-dropdown>
+        <div class="sm:hidden">
+          <button
+            color="primary"
+            class="hover:cursor-pointer border-transparent text-white hover:bg-white/10 rounded-sm items-center px-2 pt-1 border-b-2 text-sm font-medium"
+            mat-mini-fab
+            (click)="toggleOptions()">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </div>
+      </div>
+      <!-- MOBILE ELEMENTS -->
+      <div
+        *ngIf="optionsOpen"
+        id="header-mobile"
+        class="sm:hidden absolute top-16 -left-4 z-50">
+        <div
+          id="header-routes"
+          class="w-[100vw] min-h-16 bg-primary flex flex-col">
+          <a
+            (click)="routeClick()"
+            routerLink="/search"
+            [class]="
+              (rlam.isActive ? styleActive : styleNormal) +
+              ' flex items-center p-3 border-l-2 text-lg font-medium'
+            ">
+            Search
+          </a>
+
+          <a
+            (click)="routeClick()"
+            routerLink="/favorites"
+            [class]="
+              (rlaf.isActive ? styleActive : styleNormal) +
+              ' flex items-center p-3 border-l-2 text-lg font-medium'
+            ">
+            Favorites
+          </a>
+
+          <a
+            (click)="routeClick()"
+            routerLink="/lists"
+            [class]="
+              (rlal.isActive ? styleActive : styleNormal) +
+              ' flex items-center p-3 border-l-2 text-lg font-medium'
+            ">
+            Lists
+          </a>
+
+          <a
+            (click)="routeClick()"
+            routerLink="/home"
+            [class]="
+              (rlah.isActive ? styleActive : styleNormal) +
+              ' flex items-center p-3 border-l-2 text-lg font-medium'
+            ">
+            Home
+          </a>
+
+          <a
+            (click)="routeClick()"
+            *ngIf="!(loggedIn$ | async)"
+            routerLink="/login"
+            [class]="
+              (rlali.isActive ? styleActive : styleNormal) +
+              ' flex items-center p-3 border-l-2 text-lg font-medium'
+            "
+            routerLinkActive
+            #rlali="routerLinkActive">
+            Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

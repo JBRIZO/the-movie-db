@@ -1,0 +1,37 @@
+<div
+  class="bg-gray-900 relative border border-gray-900 inline-flex items-center justify-center overflow-hidden rounded-full">
+  <svg class="w-[60px] h-[60px] -rotate-[90deg]">
+    <circle
+      class="text-gray-500"
+      stroke-width="9"
+      stroke="currentColor"
+      fill="transparent"
+      r="30"
+      cx="30"
+      cy="30" />
+    <circle
+      [class]="
+        percent * 10 <= 30
+          ? 'text-red-500'
+          : percent * 10 <= 65
+          ? 'text-yellow-500'
+          : 'text-green-500'
+      "
+      stroke-width="9"
+      [attr.stroke-dasharray]="circumference"
+      [attr.stroke-dashoffset]="fill"
+      stroke-linecap="round"
+      stroke="currentColor"
+      fill="transparent"
+      r="30"
+      cx="30"
+      cy="30" />
+  </svg>
+  <div class="absolute w-[60px] h-[60px]">
+    <span
+      class="absolute text-white left-[12px] top-[50%] -translate-y-[50%] text-2xl">
+      {{ percent * 10 | number : '1.0-0' }}</span
+    >
+    <span class="text-sm absolute text-white right-[10px] top-[12px]">%</span>
+  </div>
+</div>
