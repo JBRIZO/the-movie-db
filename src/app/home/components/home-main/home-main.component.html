@@ -1,0 +1,33 @@
+<div class="home max-w-[82rem] m-auto">
+  <app-home-discover class="home__discover"></app-home-discover>
+  <div class="carrousels__container flex flex-col gap-0 mt-28">
+    <app-carrousel
+      [movieId]="null"
+      [actionToPerformMovieId]="null"
+      [actionToPerform]="playingStart"
+      [carrouselSelector]="playingMovies"
+      sectionTitle="Movies Playing Now">
+    </app-carrousel>
+    <app-carrousel
+      [movieId]="null"
+      [actionToPerformMovieId]="null"
+      [actionToPerform]="popularStart"
+      [carrouselSelector]="popularMovies"
+      sectionTitle="What's Popular">
+    </app-carrousel>
+    <app-carrousel
+      [movieId]="null"
+      [actionToPerformMovieId]="null"
+      [actionToPerform]="topRatedStart"
+      [carrouselSelector]="topRatedMovies"
+      sectionTitle="Top Rated Movies">
+    </app-carrousel>
+    <app-carrousel
+      [movieId]="null"
+      [actionToPerformMovieId]="null"
+      [actionToPerform]="upcomingStart"
+      [carrouselSelector]="upcomingMovies"
+      sectionTitle="Upcoming Movies">
+    </app-carrousel>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="w-full">
+  <form
+    class="shadow-md px-8 pt-6 pb-8 mb-4"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()">
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+        Name
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        [class.border-red-500]="name.touched && name.errors?.['required']"
+        formControlName="name"
+        type="text"
+        placeholder="List name" />
+      <p
+        class="text-red-500 text-xs italic"
+        *ngIf="name.touched && name?.errors?.['required']">
+        Please provide a name.
+      </p>
+    </div>
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+        Description
+      </label>
+      <textarea
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+        formControlName="description"
+        cols="30"
+        rows="5"
+        placeholder="Description"></textarea>
+    </div>
+    <div class="flex items-center gap-3">
+      <input
+        type="submit"
+        class="bg-primary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:cursor-pointer"
+        value="Create" />
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="button"
+        routerLink="/lists">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

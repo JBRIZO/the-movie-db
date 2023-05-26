@@ -1,0 +1,46 @@
+<div class="search max-w-[82rem] m-auto">
+  <div class="w-[80vw] pt-10 relative mx-auto">
+    <form
+      [formGroup]="searchForm"
+      (ngSubmit)="handleSubmit()"
+      class="specific__input-container">
+      <input
+        formControlName="search"
+        class="discover__input p-3 rounded-full w-full outline-none text-gray-500 pr-[6.5rem] border border-primary"
+        placeholder="Search for a movie" />
+      <button
+        type="submit"
+        class="discover__search bg-gradient-to-r from-gradientGreen to-gradientBlue absolute py-[0.85rem] px-8 bottom-0 right-0 rounded-full font-bold text-white hover:text-primary">
+        Search
+      </button>
+    </form>
+  </div>
+  <h1 class="text-center font-bold text-3xl py-6">Search Results</h1>
+  <h1
+    *ngIf="(movies$ | async)?.length === 0 && !(loading$ | async)"
+    class="text-center font-bold text-3xl py-10">
+    No Search Results Found
+  </h1>
+  <div
+    class="search__container text-primary flex flex-wrap justify-center gap-4 overflow-y-auto pb-10"
+    infinite-scroll
+    [infiniteScrollDistance]="0"
+    [infiniteScrollThrottle]="1000"
+    (scrolled)="onScroll()">
+    <app-card
+      *ngFor="let movie of movies$ | async"
+      [id]="movie.id"
+      [title]="movie.title"
+      [released]="movie.release_date"
+      [voteAvg]="movie.vote_average * 10"
+      [voteCount]="movie.vote_count"
+      [popularity]="movie.popularity"
+      [imageUrl]="movie.poster_path ? movie.poster_path : ''">
+    </app-card>
+    <div
+      class="h-[400px] w-[150px] flex flex-col items-center justify-center"
+      *ngIf="loading$ | async">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+</div>

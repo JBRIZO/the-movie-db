@@ -1,0 +1,15 @@
+<mat-card class="review-card h-72 min-w-[90vw] sm:min-w-[600px] max-w-[600px]">
+  <mat-card-header>
+    <div
+      mat-card-avatar
+      class="h-12 w-12 bg-pink-300 rounded-full font-bold flex items-center justify-center">
+      {{ username.slice(0, 1) | uppercase }}
+    </div>
+    <mat-card-title>{{ author }} </mat-card-title>
+    <mat-card-subtitle>{{ createdAt | date }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="max-h-40 overflow-auto">
+    <div [innerHTML]="content | safeHtml"></div>
+  </mat-card-content>
+</mat-card>

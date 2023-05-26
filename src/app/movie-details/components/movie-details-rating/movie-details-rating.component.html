@@ -1,0 +1,20 @@
+<div class="rating flex bg-primary p-2 rounded-md">
+  <mat-icon
+    matTooltipClass="bg-primary"
+    matTooltip="Remove Rating"
+    (click)="removeRate()"
+    class="hover:text-red-700 cursor-pointer"
+    >do_not_disturb_on</mat-icon
+  >
+  <mat-icon
+    class="hover:cursor-pointer"
+    *ngFor="let rate of rates; let i = index"
+    matTooltipClass="bg-primary"
+    [matTooltip]="rate.toString()"
+    (click)="addRate(rate)"
+    [class.text-yellow-600]="currentRate !== null && i < currentRate!"
+    (mouseenter)="onStarHover(rate)"
+    (mouseleave)="onStarLeave()"
+    >star</mat-icon
+  >
+</div>

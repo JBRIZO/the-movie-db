@@ -1,0 +1,70 @@
+<div class="min-h-full pb-10" *ngIf="movieListDetails$ | async as movieList">
+  <div
+    class="h-[300px] bg-gradient-radial bg-cover bg-center"
+    [style.background-image]="
+      movieList.items.length > 0
+        ? linearGradientStyle(imagePath, movieList.items[0].backdrop_path!)
+        : ''
+    ">
+    <div class="h-full">
+      <div class="h-[95%] w-[90%] max-w-[1200px] m-auto flex flex-col">
+        <h1 class="list-name text-white bold text-4xl mt-8 font-bold">
+          {{ movieList.name }}
+        </h1>
+        <p class="text-white font-bold">About this list</p>
+        <p class="list-description text-white">
+          {{
+            movieList.description === ''
+              ? 'No description.'
+              : movieList.description
+          }}
+        </p>
+        <div class="list__controls flex flex-row mt-auto">
+          <button
+            class="bg-gradientBlue text-white font-bold py-2 px-4 rounded flex flex-row items-center justify-center disabled:opacity-25"
+            (click)="clearList()"
+            [disabled]="movieList.items.length === 0">
+            <mat-icon>delete</mat-icon> Clear List
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div
+      class="bg-gray-100 h-30 mb-5 flex flex-col items-center"
+      *ngIf="movieList.items.length > 0">
+      <div
+        class="h-full w-max flex flex-row items-center justify-between gap-10 pt-3 pb-3">
+        <div class="text-gradientBlue flex flex-col items-center">
+          <p class="text-4xl">{{ movieList.items.length }}</p>
+          <p class="text-l font-bold">ELEMENTS</p>
+        </div>
+        <div class="text-gradientBlue flex flex-col items-center flex-nowrap">
+          <p class="text-4xl">
+            {{ movieList.items | movieItemsAverageRating }}%
+          </p>
+          <p class="text-l font-bold">AVERAGE RATING</p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="w-[90%] max-w-[1200px] flex flex-row justify-center md:justify-start items-center gap-4 flex-wrap m-auto"
+      *ngIf="movieList.items!.length > 0">
+      <app-movie
+        *ngFor="let movie of movieList.items; index as movieIndex"
+        [movie]="movie"
+        [position]="movieIndex"
+        [listId]="movieList.id!"
+        class="w-fit"></app-movie>
+    </div>
+    <div class="w-[90%] m-auto mt-5" *ngIf="movieList.items!.length === 0">
+      You have no elements in this list.
+      <a
+        routerLink="/home"
+        class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+        >Go to home.</a
+      >
+    </div>
+  </div>
+</div>
