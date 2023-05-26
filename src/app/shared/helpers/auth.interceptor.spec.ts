@@ -6,8 +6,8 @@ import { TestBed } from '@angular/core/testing';
 import { AuthInterceptor } from './auth.interceptor';
 import { Injectable } from '@angular/core';
 import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { API_KEY } from 'src/app/auth/services/apiKey';
 import { AuthLocalStorageService } from '../services/auth-local-storage.service';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable()
 export class MockHttpService {
@@ -42,6 +42,7 @@ describe('AuthInterceptor', () => {
   });
 
   it('should append api_key and sessionId', () => {
+    const API_KEY = environment.apiKey;
     service.testRequest().subscribe();
     httpMock.expectOne(
       `https:testurl.com/test?session_id=null&api_key=${API_KEY}`
